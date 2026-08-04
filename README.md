@@ -1,58 +1,252 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Langtang South Area Council Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The official website for the Langtang South Area Council, Plateau State, Nigeria. Built with Laravel 11, Blade, Tailwind CSS, and Alpine.js.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Public-Facing
+- **Homepage** — hero banner, quick links, latest news, announcements, events, gallery preview, emergency contacts
+- **About** — history, vision & mission, leadership, organisational structure
+- **Departments** — listing and detail pages
+- **News** — listing with search & category filters, detail pages
+- **Projects** — listing with search & status filter, detail pages
+- **Public Notices** — announcements page
+- **Downloads** — categorized documents with file downloads
+- **Gallery** — albums and images
+- **Contact** — contact form with validation, map, and info
+- **Global Search** — search across news, projects, departments, gallery, notices, and documents
+- **SEO** — meta tags, Open Graph, Twitter Cards, canonical URLs on all pages
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Admin CMS (`/admin`)
+- **Role-based access** — admin and editor roles
+- **Dashboard** — stats and recent activity
+- **Full CRUD** for: Departments, Leadership, News Articles (CKEditor), News Categories, Projects, Public Notices, Documents, Document Categories, Gallery Albums, Gallery Images
+- **Contact Message management** — read/unread status, delete
+- **User Management** — create/edit/delete users with roles
+- **Website Settings** — general, contact, and social settings with logo upload
+- **Image optimization** — automatic resize and compression on upload (GD)
+- **File uploads** — secure file validation (PDF, DOC, XLS, images) with size limits
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+- **Backend**: Laravel 11 (PHP 8.2+)
+- **Frontend**: Blade templates, Tailwind CSS, Alpine.js
+- **Editor**: CKEditor 5 (bundled via Vite)
+- **Database**: MySQL (SQLite for local development)
+- **Build**: Vite 8 with code splitting
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requirements
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Composer 2.x
+- Node.js 20+ and npm
+- MySQL 8+ (or SQLite for local dev)
+- GD extension for image optimization
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Installation
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clone and Install Dependencies
 
 ```bash
-composer require laravel/boost --dev
+git clone <repository-url> langtang-south
+cd langtang-south
 
-php artisan boost:install
+composer install
+npm install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Configure Environment
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Edit `.env` and set your database credentials:
 
-## Code of Conduct
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=langtang_south
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Run Migrations and Seed
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+This creates the default admin user, settings, and sample content.
+
+### 4. Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 5. Start Development Servers
+
+```bash
+npm run dev        # Vite dev server (terminal 1)
+php artisan serve  # Laravel server (terminal 2)
+```
+
+Visit `http://localhost:8000` for the website and `http://localhost:8000/admin` for the admin panel.
+
+## Default Admin Account
+
+| Field    | Value               |
+|----------|---------------------|
+| Email    | admin@example.com   |
+| Password | password            |
+
+> [!CAUTION]
+> **Change the default password immediately after first login.**
+
+## Deployment Guide
+
+### Shared Hosting (cPanel / DirectAdmin)
+
+1. Upload the project files to the server (excluding `node_modules`, `.env`).
+2. Create a MySQL database and user, grant all privileges.
+3. Set up `.env` with production values:
+   ```env
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_URL=https://your-domain.com
+   ```
+4. Run the following in the project directory (via SSH or terminal):
+   ```bash
+   composer install --no-dev --optimize-autoloader
+   php artisan key:generate
+   php artisan migrate --force
+   php artisan db:seed --force
+   php artisan storage:link
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   npm install
+   npm run build
+   ```
+5. Point your domain's document root to the `public/` directory.
+
+### VPS / Dedicated Server (Nginx + PHP-FPM)
+
+```bash
+# Server setup (Ubuntu/Debian)
+sudo apt update
+sudo apt install -y nginx mysql-server php8.2-fpm php8.2-mysql php8.2-gd php8.2-mbstring php8.2-xml php8.2-curl unzip
+
+# PHP Composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+
+# Node.js
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Deploy
+cd /var/www
+git clone <repository-url> langtang-south
+cd langtang-south
+composer install --no-dev --optimize-autoloader
+cp .env.example .env
+php artisan key:generate
+# ... configure .env with production values ...
+php artisan migrate --force
+php artisan db:seed --force
+php artisan storage:link
+npm install
+npm run build
+```
+
+**Nginx site config** (`/etc/nginx/sites-available/langtang-south`):
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /var/www/langtang-south/public;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/langtang-south /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### Post-Deployment Checklist
+
+- [ ] Set `APP_ENV=production` and `APP_DEBUG=false`
+- [ ] Run `php artisan config:cache`, `route:cache`, `view:cache`
+- [ ] Verify `storage:link` is active
+- [ ] Change the default admin password
+- [ ] Configure cron for Laravel scheduler (if using scheduled tasks):
+  ```bash
+  * * * * * cd /path-to-project && php artisan schedule:run >> /dev/null 2>&1
+  ```
+- [ ] Set up SSL with Let's Encrypt: `sudo certbot --nginx`
+
+## Security Notes
+
+- All admin routes are protected by the `IsAdmin` middleware (role check).
+- File uploads are validated by MIME type and size limits.
+- Passwords are hashed automatically (Laravel `hashed` cast).
+- Users cannot delete their own account.
+- CSRF protection enabled on all forms.
+
+## Project Structure
+
+```
+app/
+├── Http/
+│   ├── Controllers/Admin/    # Admin CMS controllers
+│   ├── Controllers/          # Public-facing controllers
+│   └── Requests/Admin/       # Form validation requests
+├── Models/                   # Eloquent models
+├── Services/                 # Service classes (e.g., ImageOptimizer)
+└── View/Components/          # Blade components
+resources/views/
+├── layouts/                  # Public & admin layouts
+├── components/               # Reusable Blade components
+├── admin/                    # Admin CMS views
+└── ...                       # Public-facing page views
+routes/
+├── web.php                   # Public routes
+└── admin.php                 # Admin routes (loaded in bootstrap/app.php)
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

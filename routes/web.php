@@ -40,6 +40,7 @@ Route::get('/public-notices', [PageController::class, 'notices'])->name('notices
 
 // Downloads
 Route::get('/downloads', [DownloadController::class, 'index'])->name('downloads.index');
+Route::get('/downloads/{document}', [DownloadController::class, 'download'])->name('downloads.download');
 
 // Gallery
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
@@ -48,6 +49,9 @@ Route::get('/gallery/{slug}', [GalleryController::class, 'show'])->name('gallery
 // Contact Us
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Global Search
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
 
 Route::get('/dashboard', function () {

@@ -11,8 +11,15 @@ class PublicLayout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
+    public function __construct(
+        public ?string $title = null,
+        public ?string $metaDescription = null,
+        public ?string $metaKeywords = null,
+        public ?string $ogTitle = null,
+        public ?string $ogDescription = null,
+        public ?string $ogType = null,
+        public ?string $ogImage = null,
+    ) {
         //
     }
 

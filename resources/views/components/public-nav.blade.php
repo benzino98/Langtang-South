@@ -62,6 +62,13 @@
                           {{ request()->is('contact*') ? 'text-primary-green bg-green-50 font-semibold' : 'text-gray-700 hover:text-primary-green hover:bg-green-50' }}">
                     Contact
                 </a>
+                <a href="{{ route('search') }}"
+                   class="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-primary-green hover:bg-green-50 transition-colors duration-200"
+                   aria-label="Search the website">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </a>
             </div>
 
             {{-- Mobile Menu Button --}}
@@ -121,6 +128,12 @@
                class="block px-3 py-2 rounded-md text-base font-medium {{ request()->is('contact*') ? 'text-primary-green bg-green-50' : 'text-gray-700 hover:text-primary-green hover:bg-green-50' }}">
                 Contact
             </a>
+            <div class="px-3 py-2">
+                <form action="{{ route('search') }}" method="GET" class="flex items-center">
+                    <input type="search" name="q" placeholder="Search..."
+                           class="w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-green focus:ring-primary-green text-sm">
+                </form>
+            </div>
         </div>
     </div>
 </nav>

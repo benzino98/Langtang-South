@@ -1,4 +1,9 @@
-<x-public-layout>
+<x-public-layout
+    :title="$album->title . ' | Gallery | Langtang South Area Council'"
+    :meta-description="\Illuminate\Support\Str::limit(strip_tags($album->description ?? ''), 160)"
+    :og-title="$album->title"
+    :og-image="$album->cover_image ? asset('storage/' . $album->cover_image) : null"
+>
     {{-- Album Header --}}
     <section class="bg-primary-green relative overflow-hidden py-16 sm:py-20">
         <div class="absolute inset-0 opacity-10">

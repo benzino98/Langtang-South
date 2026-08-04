@@ -1,4 +1,10 @@
-<x-public-layout>
+<x-public-layout
+    :title="$article->title . ' | Langtang South Area Council'"
+    :meta-description="\Illuminate\Support\Str::limit(strip_tags($article->content), 160)"
+    :og-title="$article->title"
+    :og-type="'article'"
+    :og-image="$article->featured_image ? asset('storage/' . $article->featured_image) : null"
+>
     {{-- Article Header --}}
     <section class="bg-primary-green relative overflow-hidden py-16 sm:py-20">
         <div class="absolute inset-0 opacity-10">
