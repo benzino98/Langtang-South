@@ -44,18 +44,23 @@
     </section>
 
     {{-- Announcements / Notice Bar --}}
-    <section class="bg-gold-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-green text-white text-xs font-bold uppercase tracking-wider">
-                    Notice
-                </span>
-                <p class="text-gray-900 font-medium text-center sm:text-left">
-                    Public holiday declared on Friday, 15 August 2026. All council offices will be closed.
-                </p>
+    @if($announcements->isNotEmpty())
+        <section class="bg-gold-accent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-green text-white text-xs font-bold uppercase tracking-wider">
+                        Notice
+                    </span>
+                    <p class="text-gray-900 font-medium text-center sm:text-left">
+                        {{ $announcements->first()->title }}: {{ Str::limit($announcements->first()->description, 100) }}
+                        @if($announcements->first()->attachment_path)
+                            <a href="{{ asset('storage/' . $announcements->first()->attachment_path) }}" class="underline font-bold ml-1 hover:text-primary-green transition-colors">Download Attachment</a>
+                        @endif
+                    </p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     {{-- Latest News Section --}}
     <section class="py-16 bg-light-gray">
@@ -65,7 +70,7 @@
                     <h2 class="font-heading text-3xl font-bold text-gray-900 mb-2">Latest News</h2>
                     <p class="text-gray-500">Stay updated with the latest developments from the Council.</p>
                 </div>
-                <a href="{{ url('/news') }}" class="hidden sm:inline-flex items-center text-primary-green font-semibold hover:underline text-sm">
+                <a href="{{ route('news.index') }}" class="hidden sm:inline-flex items-center text-primary-green font-semibold hover:underline text-sm">
                     View All News
                     <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -73,28 +78,31 @@
                 </a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {{-- News cards will be populated from the database in Phase 3 --}}
-                @for($i = 0; $i < 3; $i++)
-                    <x-card title="Council Approves New Community Development Plan"
-                            subtitle="Council News · Aug 1, 2026"
-                            href="{{ url('/news') }}"
+                @forelse($latestNews as $article)
+                    <x-card :title="$article->title"
+                            :subtitle="($article->category ? $article->category->name : 'News') . ' · ' . ($article->published_at ? $article->published_at->format('M d, Y') : $article->created_at->format('M d, Y'))"
+                            :href="route('news.show', $article->slug)"
+                            :image="$article->featured_image ? asset('storage/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop'"
                             badge="New"
                             badgeColor="bg-gold-accent">
                         <p class="text-sm text-gray-500 mb-4">
-                            The Council has approved a comprehensive development plan aimed at improving
-                            infrastructure across all wards in the Langtang local government area.
+                            {{ $article->summary }}
                         </p>
-                        <a href="{{ url('/news') }}" class="inline-flex items-center text-sm font-semibold text-primary-green hover:underline">
+                        <a href="{{ route('news.show', $article->slug) }}" class="inline-flex items-center text-sm font-semibold text-primary-green hover:underline">
                             Read More
                             <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
                         </a>
                     </x-card>
-                @endfor
+                @empty
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500">No news articles published yet. Stay tuned!</p>
+                    </div>
+                @endforelse
             </div>
             <div class="mt-8 sm:hidden text-center">
-                <a href="{{ url('/news') }}" class="inline-flex items-center text-primary-green font-semibold hover:underline text-sm">
+                <a href="{{ route('news.index') }}" class="inline-flex items-center text-primary-green font-semibold hover:underline text-sm">
                     View All News
                     <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -112,31 +120,28 @@
                 <p class="text-gray-500 max-w-2xl mx-auto">Mark your calendars for these important council and community events.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @php
-                    $events = [
-                        ['date' => 'Aug 15', 'title' => 'Monthly Council Meeting', 'venue' => 'Council Secretariat Hall'],
-                        ['date' => 'Aug 22', 'title' => 'Community Health Outreach', 'venue' => 'Langtang General Hospital'],
-                        ['date' => 'Sep 05', 'title' => 'Farmers Empowerment Forum', 'venue' => 'Langtang Town Hall'],
-                    ];
-                @endphp
-                @foreach($events as $event)
+                @forelse($upcomingEvents as $event)
                     <div class="bg-light-gray rounded-xl p-6 hover:shadow-md transition-shadow duration-300 flex items-start space-x-4">
                         <div class="flex-shrink-0 w-16 h-16 bg-primary-green rounded-lg flex flex-col items-center justify-center text-white">
-                            <span class="text-lg font-heading font-bold leading-none">{{ explode(' ', $event['date'])[1] }}</span>
-                            <span class="text-xs uppercase tracking-wider mt-1">{{ explode(' ', $event['date'])[0] }}</span>
+                            <span class="text-lg font-heading font-bold leading-none">{{ $event->event_date->format('d') }}</span>
+                            <span class="text-xs uppercase tracking-wider mt-1">{{ $event->event_date->format('M') }}</span>
                         </div>
                         <div>
-                            <h3 class="font-heading font-semibold text-gray-900 mb-1">{{ $event['title'] }}</h3>
+                            <h3 class="font-heading font-semibold text-gray-900 mb-1">{{ $event->title }}</h3>
                             <p class="text-sm text-gray-500 flex items-center">
                                 <svg class="w-4 h-4 mr-1 text-primary-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                 </svg>
-                                {{ $event['venue'] }}
+                                {{ $event->venue }}
                             </p>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500">No upcoming events scheduled at the moment.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
