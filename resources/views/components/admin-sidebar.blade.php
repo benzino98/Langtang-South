@@ -54,7 +54,7 @@
                     // Route not yet defined
                 }
             @endphp
-            <a href="{{ route_exists($item['route']) ? route($item['route']) : '#' }}"
+            <a href="{{ \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : '#' }}"
                class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200
                       {{ $isActive ? 'bg-primary-green text-white' : 'text-gray-600 hover:bg-green-50 hover:text-primary-green' }}">
                 <svg class="w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

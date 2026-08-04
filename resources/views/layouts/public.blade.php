@@ -16,10 +16,7 @@
 </head>
 <body class="font-sans text-gray-900 antialiased bg-light-gray">
     <div class="min-h-screen flex flex-col">
-        {{-- Header --}}
-        <header class="bg-white shadow-md">
-            {{-- Navigation will go here --}}
-        </header>
+        <x-public-nav />
 
         {{-- Page Content --}}
         <main class="flex-grow">
@@ -27,9 +24,7 @@
         </main>
 
         {{-- Footer --}}
-        <footer class="bg-primary-green text-white">
-            {{-- Footer content will go here --}}
-        </footer>
+        <x-public-footer />
     </div>
 </body>
 </html>
