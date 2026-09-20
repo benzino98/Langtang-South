@@ -1,4 +1,4 @@
-name: Build & Deploy to Hosting Server
+name: Build & Deploy via FTP
 
 on:
   push:
@@ -9,10 +9,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
 
     steps:
       - name: Checkout Repository
@@ -48,26 +44,7 @@ jobs:
           npm ci || npm install
           npm run build
 
-      - name: Deploy via SSH (SFTP / Rsync)
-        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_KEY != '' }}
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-          ARGS: "-rlgoDzc --exclude='.git*' --exclude='node_modules*' --exclude='storage/*.key'"
-          SOURCE: "."
-          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
-          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-          TARGET: ${{ secrets.DEPLOY_REMOTE_DIR || '/public_html' }}
-          SCRIPT_AFTER: |
-            cd ${{ secrets.DEPLOY_REMOTE_DIR || '/public_html' }}
-            php artisan storage:link || true
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-            php artisan migrate --force || true
-
-      - name: Deploy via FTP (Fallback for Shared Hosting)
-        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_KEY == '' && env.DEPLOY_PASSWORD != '' }}
+      - name: Deploy to Server via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.DEPLOY_HOST }}
@@ -80,3 +57,5 @@ jobs:
             **/.git*/**
             **/node_modules/**
             storage/*.key
+            tests/**
+            README.md
