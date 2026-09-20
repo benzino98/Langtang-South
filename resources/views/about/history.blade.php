@@ -47,20 +47,26 @@
                         
                         <div class="prose max-w-none text-gray-600 space-y-8 relative z-10">
                             <p class="text-xl leading-relaxed text-gray-700 font-medium">
-                                Langtang South has a rich history that dates back several generations. The people of Langtang South are known for their resilience, agricultural skill, bravery, and significant contribution to national peace and security.
+                                Langtang South Local Government Area is located in the southern part of Plateau State and has a rich history rooted in the communities of the former Resettlement Area and the wider Tarok homeland.
                             </p>
                             
                             <div>
-                                <h3 class="font-heading text-2xl font-bold text-gray-900 mb-4">Administrative Evolution</h3>
+                                <h3 class="font-heading text-2xl font-bold text-gray-900 mb-4">Origins & Administrative Evolution</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    Its administrative history dates back to the colonial period, when the area formed part of the Resettlement Scheme under the Shendam Native Authority. Following several administrative reforms, the area became part of Langtang Local Government in 1976.
+                                </p>
                                 <p class="text-lg leading-relaxed">
-                                    Originally part of the larger administrative zones in the colonial and post-colonial eras, Langtang South Local Government Council was established to bring governance closer to the local population. Over the decades, it has evolved into a hub of cultural preservation and socio-economic development in the southern zone of Plateau State.
+                                    Langtang South Local Government Area was formally created in 1991 during the nationwide local government reforms under the administration of General Ibrahim Babangida. The headquarters is situated in Mabudi, and the Local Government comprises 10 wards.
                                 </p>
                             </div>
                             
                             <div>
-                                <h3 class="font-heading text-2xl font-bold text-gray-900 mb-4">Cultural Legacy</h3>
+                                <h3 class="font-heading text-2xl font-bold text-gray-900 mb-4">Geography & Demographic Growth</h3>
+                                <p class="text-lg leading-relaxed mb-4">
+                                    Covering approximately 838 square kilometres, Langtang South shares boundaries with Langtang North, Wase and Shendam Local Government Areas of Plateau State, as well as communities towards Wukari in Taraba State. The area is characterised by fertile plains and hills, with agriculture serving as a major source of livelihood for its people.
+                                </p>
                                 <p class="text-lg leading-relaxed mb-6">
-                                    The people celebrate a variety of traditional festivals that highlight their unity, history, and agricultural prowess. These festivals serve as a gathering point for citizens from across the country and visitors globally, showcasing the unique traditional dances, attire, and oral history of the region.
+                                    According to the 2006 National Population Census, Langtang South had a population of 105,173 people. Over the years, the Local Government has grown through the contributions of its traditional institutions, community leaders, public servants and citizens. Today, Langtang South remains a vibrant and culturally rich community, committed to sustainable development, effective grassroots governance and the wellbeing of its people.
                                 </p>
                             </div>
                         </div>

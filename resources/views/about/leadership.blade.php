@@ -45,7 +45,7 @@
                             {{-- Decorative Background --}}
                             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-green-50 rounded-full opacity-50 transform group-hover:scale-110 transition-transform duration-700"></div>
                             
-                            <h2 class="font-heading text-xl font-bold text-primary-green uppercase tracking-wider mb-8 relative z-10 border-b-2 border-primary-green/20 pb-2 inline-block">Executive Chairman</h2>
+                            <h2 class="font-heading text-xs font-bold text-primary-green uppercase tracking-widest mb-8 relative z-10 border-b-2 border-primary-green/20 pb-2 inline-block">Executive Chairman</h2>
                             <div class="md:flex md:items-start md:space-x-10 relative z-10">
                                 <div class="md:w-1/3 mb-8 md:mb-0 shrink-0">
                                     <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated border-4 border-white relative group-hover:shadow-xl transition-shadow duration-300">
@@ -56,14 +56,14 @@
                                 </div>
                                 <div class="md:w-2/3">
                                     <h3 class="font-heading text-3xl font-extrabold text-gray-900 mb-2">{{ $chairman->full_name }}</h3>
-                                    <p class="text-base font-bold text-gold-accent mb-6 uppercase tracking-wider">Executive Chairman, Langtang South Local Government Council</p>
+                                    <p class="text-sm font-bold text-gold-accent-dark mb-6 uppercase tracking-wider">Executive Chairman, Langtang South Local Government Council</p>
                                     @if($chairman->welcome_message)
-                                        <div class="bg-green-50 p-6 rounded-xl border-l-4 border-primary-green mb-6 shadow-sm">
-                                            <h4 class="font-heading font-bold text-primary-green text-sm uppercase tracking-wider mb-2">Welcome Message</h4>
-                                            <p class="text-base text-gray-700 italic leading-relaxed">"{{ $chairman->welcome_message }}"</p>
+                                        <div class="bg-green-50 p-6 rounded-xl border-l-4 border-primary-green mb-6 shadow-xs">
+                                            <h4 class="font-heading font-bold text-primary-green text-xs uppercase tracking-wider mb-2">Official Welcome Message</h4>
+                                            <p class="text-sm text-gray-700 italic leading-relaxed">"{{ $chairman->welcome_message }}"</p>
                                         </div>
                                     @endif
-                                    <div class="prose text-gray-600 leading-relaxed">
+                                    <div class="prose text-gray-600 leading-relaxed text-sm space-y-3">
                                         <p>{{ $chairman->biography }}</p>
                                     </div>
                                 </div>
@@ -73,19 +73,15 @@
 
                     {{-- Vice Chairman & Council Secretary --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {{-- Vice Chairman --}}
+                        {{-- Deputy Chairman --}}
                         @if($viceChairman)
-                            <div class="card p-8 group">
-                                <h2 class="font-heading text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Vice Chairman</h2>
-                                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                                    <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 shadow-md border-4 border-white">
-                                        <img src="{{ $viceChairman->image_path ? asset('storage/' . $viceChairman->image_path) : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop' }}"
-                                             alt="{{ $viceChairman->full_name }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <h3 class="font-heading font-extrabold text-gray-900 text-xl mb-1">{{ $viceChairman->full_name }}</h3>
-                                        <p class="text-sm text-gold-accent font-bold uppercase tracking-wider mb-3">Vice Chairman</p>
-                                        <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $viceChairman->biography }}</p>
+                            <div class="card p-8 group flex flex-col justify-between">
+                                <div>
+                                    <h2 class="font-heading text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Deputy Chairman</h2>
+                                    <div class="space-y-4">
+                                        <h3 class="font-heading font-extrabold text-gray-900 text-xl">{{ $viceChairman->full_name }}</h3>
+                                        <p class="text-xs text-gold-accent-dark font-bold uppercase tracking-wider">Deputy Chairman, Langtang South LGA</p>
+                                        <p class="text-sm text-gray-600 leading-relaxed">{{ $viceChairman->biography }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -93,17 +89,13 @@
 
                         {{-- Secretary --}}
                         @if($secretary)
-                            <div class="card p-8 group">
-                                <h2 class="font-heading text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Council Secretary</h2>
-                                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                                    <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 shadow-md border-4 border-white">
-                                        <img src="{{ $secretary->image_path ? asset('storage/' . $secretary->image_path) : 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop' }}"
-                                             alt="{{ $secretary->full_name }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <h3 class="font-heading font-extrabold text-gray-900 text-xl mb-1">{{ $secretary->full_name }}</h3>
-                                        <p class="text-sm text-gold-accent font-bold uppercase tracking-wider mb-3">Secretary to the Council</p>
-                                        <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $secretary->biography }}</p>
+                            <div class="card p-8 group flex flex-col justify-between">
+                                <div>
+                                    <h2 class="font-heading text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Council Secretary</h2>
+                                    <div class="space-y-4">
+                                        <h3 class="font-heading font-extrabold text-gray-900 text-xl">{{ $secretary->full_name }}</h3>
+                                        <p class="text-xs text-gold-accent-dark font-bold uppercase tracking-wider">Secretary to the Council</p>
+                                        <p class="text-sm text-gray-600 leading-relaxed">{{ $secretary->biography }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,22 +106,56 @@
                     @if($councillors->isNotEmpty())
                         <div class="card p-8 sm:p-10">
                             <div class="flex items-center mb-8 pb-4 border-b border-gray-100">
-                                <h2 class="font-heading text-xl font-bold text-primary-green uppercase tracking-wider">Supervisory Councillors</h2>
+                                <h2 class="font-heading text-lg font-bold text-primary-green uppercase tracking-wider">Supervisory Councillors</h2>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                                 @foreach($councillors as $councillor)
-                                    <div class="text-center group">
-                                        <div class="w-32 h-32 rounded-full overflow-hidden bg-light-gray mx-auto mb-5 shadow-sm border-2 border-white group-hover:border-primary-green/30 transition-colors duration-300 relative">
-                                            <img src="{{ $councillor->image_path ? asset('storage/' . $councillor->image_path) : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' }}"
-                                                 alt="{{ $councillor->full_name }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                        </div>
-                                        <h3 class="font-heading font-bold text-gray-900 text-lg mb-1">{{ $councillor->full_name }}</h3>
-                                        <p class="text-sm text-primary-green font-semibold uppercase tracking-wider">{{ $councillor->portfolio }}</p>
+                                    <div class="bg-gray-50/70 p-5 rounded-2xl border border-gray-100 hover:border-primary-green/30 hover:bg-green-50/50 transition-colors duration-200">
+                                        <h3 class="font-heading font-bold text-gray-900 text-base mb-1">{{ $councillor->full_name }}</h3>
+                                        <p class="text-xs text-primary-green font-bold uppercase tracking-wider">{{ $councillor->portfolio }}</p>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     @endif
+
+                    {{-- Elected Legislative Councillors --}}
+                    <div class="card p-8 sm:p-10">
+                        <div class="flex items-center mb-8 pb-4 border-b border-gray-100">
+                            <h2 class="font-heading text-lg font-bold text-primary-green uppercase tracking-wider">Elected Legislative Councillors</h2>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            @php
+                                $legislators = [
+                                    ['name' => 'Rt. Hon. Danjuma Lohsel', 'ward' => 'Dadin-Kowa', 'role' => 'Leader'],
+                                    ['name' => 'Rt. Hon Timfa Ntyem Mullak', 'ward' => 'Talgwang', 'role' => 'Deputy Leader'],
+                                    ['name' => 'Hon. Jimam Paul Lar', 'ward' => 'Sabon Gida', 'role' => 'Member'],
+                                    ['name' => 'Hon. Nansak Waidu', 'ward' => 'Magama', 'role' => 'Member'],
+                                    ['name' => 'Hon. Dashe Nandul', 'ward' => 'Mabudi-North', 'role' => 'Member'],
+                                    ['name' => 'Hon. Binbol Nimmyel', 'ward' => 'Mabudi-South', 'role' => 'Member'],
+                                    ['name' => 'Hon. Butnap Justina', 'ward' => 'Turaki', 'role' => 'Member'],
+                                    ['name' => 'Hon. Samson Nandok Danjuma', 'ward' => 'Nassarawa', 'role' => 'Member'],
+                                    ['name' => 'Hon Sabut Shetur', 'ward' => 'Takbol', 'role' => 'Member'],
+                                    ['name' => 'Hon. Amos Vongjen Stephen', 'ward' => 'Jemkur', 'role' => 'Member'],
+                                    ['name' => 'Hon. Timloh Makwam', 'ward' => 'Timbol', 'role' => 'Member'],
+                                    ['name' => 'Hon. Napdam Chirtip', 'ward' => 'Lashel', 'role' => 'Member'],
+                                    ['name' => 'Hon. Sunday Timkap Tyem', 'ward' => 'Gamakai', 'role' => 'Member'],
+                                    ['name' => 'Hon Timnan Bunu Jonah', 'ward' => 'Fajul', 'role' => 'Member'],
+                                    ['name' => 'Hon. Laven Dashe Chakven', 'ward' => 'Faya', 'role' => 'Member'],
+                                ];
+                            @endphp
+                            @foreach($legislators as $leg)
+                                <div class="p-4 rounded-xl bg-white border border-gray-100 shadow-xs hover:border-gold-accent/40 transition-colors duration-200">
+                                    <div class="text-xs font-bold uppercase tracking-wider text-gold-accent-dark mb-1">
+                                        {{ $leg['ward'] }} @if($leg['role'] !== 'Member') · <span class="text-primary-green">{{ $leg['role'] }}</span> @endif
+                                    </div>
+                                    <div class="font-heading font-extrabold text-gray-900 text-sm">
+                                        {{ $leg['name'] }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

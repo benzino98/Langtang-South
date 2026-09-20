@@ -94,15 +94,15 @@
                                 <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 w-full hover:shadow-elevated transition-shadow duration-300">
                                     <h3 class="font-heading font-bold text-gray-900 text-center mb-6 text-xl">Core Operating Departments</h3>
                                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center text-sm font-bold text-gray-700">
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Administration</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Finance</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Works & Housing</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Agriculture</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Health</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Personnel Management</div>
                                         <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Education</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Environment</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Information</div>
-                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Planning & Stats</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Health</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Works & Housing</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Social Services</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Agriculture</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Finance & Supplies</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">WASH (Water & Hygiene)</div>
+                                        <div class="bg-light-gray p-4 rounded-xl border border-gray-100 hover:bg-green-50 hover:text-primary-green hover:border-green-200 transition-colors duration-200">Budget, Planning & Research</div>
                                     </div>
                                 </div>
                             </div>

@@ -1,22 +1,11 @@
-<x-public-layout title="Search Results | Langtang South Area Council">
+<x-public-layout title="Search Results | Langtang South Local Government Council">
     {{-- Page Header --}}
-    <section class="bg-primary-green relative overflow-hidden py-16 sm:py-20">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-gold-accent rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-        </div>
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white">
-                Search Results
-            </h1>
-            <p class="mt-4 text-lg text-green-100">
-                @if ($query)
-                    Showing results for "{{ $query }}"
-                @else
-                    Search the Langtang South Area Council website
-                @endif
-            </p>
-        </div>
-    </section>
+    <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
+        title="Search Portal"
+        :subtitle="$query ? 'Showing results for &quot;' . e($query) . '&quot;' : 'Search news, projects, departments, and official documents.'"
+    />
 
     {{-- Search Form --}}
     <section class="py-12">
