@@ -9,6 +9,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
 
     steps:
       - name: Checkout Repository
@@ -45,7 +49,7 @@ jobs:
           npm run build
 
       - name: Deploy via SSH (SFTP / Rsync)
-        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_KEY != '' }}
+        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_KEY != '' }}
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -63,7 +67,7 @@ jobs:
             php artisan migrate --force || true
 
       - name: Deploy via FTP (Fallback for Shared Hosting)
-        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_KEY == '' && secrets.DEPLOY_PASSWORD != '' }}
+        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_KEY == '' && env.DEPLOY_PASSWORD != '' }}
         uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.DEPLOY_HOST }}
