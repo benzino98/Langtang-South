@@ -1,8 +1,10 @@
 <x-public-layout>
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         title="Downloads"
-        subtitle="Access official documents, forms, gazettes, and publications from the Langtang Local Government Council."
+        subtitle="Access official documents, forms, gazettes, and publications from Langtang South Local Government Council."
     />
 
     <div class="py-12 bg-light-gray min-h-[60vh]">

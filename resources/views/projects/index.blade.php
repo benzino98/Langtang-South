@@ -1,8 +1,10 @@
 <x-public-layout>
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         title="Council Projects"
-        subtitle="Explore our ongoing, completed, and planned projects across all communities in Langtang."
+        subtitle="Explore our ongoing, completed, and planned projects across all communities in Langtang South."
     />
 
     <div class="py-12 bg-light-gray min-h-[60vh]">

@@ -9,14 +9,14 @@
 
             <x-form-input name="name" label="Department Name" required />
 
-            <x-form-textarea name="description" label="Description" rows="8" required />
+            <x-form-textarea name="overview" label="Overview" rows="8" required />
 
             <div>
-                <label for="featured_image" class="block text-sm font-medium text-gray-700">Featured Image</label>
+                <label for="image_path" class="block text-sm font-medium text-gray-700">Featured Image</label>
                 <div class="mt-1 flex items-center">
-                    <input type="file" name="featured_image" id="featured_image" class="w-full">
+                    <input type="file" name="image_path" id="image_path" class="w-full">
                 </div>
-                @error('featured_image')
+                @error('image_path')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>

@@ -1,8 +1,10 @@
 <x-public-layout>
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         title="Contact Us"
-        subtitle="We are here to help. Reach out to the Langtang Local Government Council with your questions, feedback, or inquiries."
+        subtitle="We are here to help. Reach out to Langtang South Local Government Council with your questions, feedback, or inquiries."
     />
 
     <div class="py-12 bg-light-gray">

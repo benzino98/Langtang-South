@@ -4,11 +4,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    body {
+        @apply text-slate-800 bg-slate-50 antialiased;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading tracking-tight;
+    }
+}
+
 @layer components {
     .btn-primary {
-        @apply inline-flex items-center px-4 py-2 bg-primary-green border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:ring ring-green-300 disabled:opacity-25 transition ease-in-out duration-150;
+        @apply inline-flex items-center justify-center px-6 py-3 bg-primary-green border border-transparent rounded-lg font-semibold text-sm text-white shadow-sm hover:bg-primary-green-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-green transition-all duration-200 ease-in-out;
     }
     .btn-secondary {
-        @apply inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition ease-in-out duration-150;
+        @apply inline-flex items-center justify-center px-6 py-3 bg-white border border-gray-200 rounded-lg font-semibold text-sm text-gray-700 shadow-sm hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-all duration-200 ease-in-out;
+    }
+    .btn-outline {
+        @apply inline-flex items-center justify-center px-6 py-3 bg-transparent border-2 border-primary-green rounded-lg font-semibold text-sm text-primary-green hover:bg-primary-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-green transition-all duration-200 ease-in-out;
+    }
+    .card {
+        @apply bg-white rounded-2xl shadow-subtle border border-gray-100 transition-shadow duration-300 hover:shadow-elevated;
+    }
+    .section-title {
+        @apply font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+    }
+    .section-subtitle {
+        @apply text-lg text-gray-600 max-w-2xl mx-auto;
     }
 }

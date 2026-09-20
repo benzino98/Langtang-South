@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreDepartmentRequest;
+use App\Http\Requests\Admin\UpdateDepartmentRequest;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -31,8 +33,8 @@ class DepartmentController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->hasFile('featured_image')) {
-            $data['featured_image'] = app(\App\Services\ImageOptimizer::class)->store($request->file('featured_image'), 'departments');
+        if ($request->hasFile('image_path')) {
+            $data['image_path'] = app(\App\Services\ImageOptimizer::class)->store($request->file('image_path'), 'departments');
         }
 
         $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
@@ -65,12 +67,12 @@ class DepartmentController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->hasFile('featured_image')) {
+        if ($request->hasFile('image_path')) {
             // Delete old image
-            if ($department->featured_image) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($department->featured_image);
+            if ($department->image_path) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($department->image_path);
             }
-            $data['featured_image'] = app(\App\Services\ImageOptimizer::class)->store($request->file('featured_image'), 'departments');
+            $data['image_path'] = app(\App\Services\ImageOptimizer::class)->store($request->file('image_path'), 'departments');
         }
 
         $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
@@ -85,9 +87,9 @@ class DepartmentController extends Controller
      */
     public function destroy(\App\Models\Department $department)
     {
-        // Delete the featured image if it exists
-        if ($department->featured_image) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($department->featured_image);
+        // Delete the image if it exists
+        if ($department->image_path) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($department->image_path);
         }
 
         $department->delete();

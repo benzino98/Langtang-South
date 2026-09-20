@@ -31,8 +31,8 @@ class SearchController extends Controller
         $articles = NewsArticle::published()
             ->where(function ($q) use ($term) {
                 $q->where('title', 'like', $term)
-                    ->orWhere('content', 'like', $term)
-                    ->orWhere('excerpt', 'like', $term);
+                    ->orWhere('summary', 'like', $term)
+                    ->orWhere('body', 'like', $term);
             })
             ->select('id', 'title', 'slug', 'featured_image', 'created_at')
             ->get()
@@ -61,14 +61,15 @@ class SearchController extends Controller
             ]);
 
         $departments = Department::where('name', 'like', $term)
-            ->orWhere('description', 'like', $term)
-            ->select('id', 'name', 'slug', 'featured_image', 'created_at')
+            ->orWhere('overview', 'like', $term)
+            ->orWhere('responsibilities', 'like', $term)
+            ->select('id', 'name', 'slug', 'image_path', 'created_at')
             ->get()
             ->map(fn ($item) => [
                 'type' => 'Department',
                 'title' => $item->name,
                 'url' => route('departments.show', $item->slug),
-                'image' => $item->featured_image ? asset('storage/' . $item->featured_image) : null,
+                'image' => $item->image_path ? asset('storage/' . $item->image_path) : null,
                 'date' => null,
             ]);
 

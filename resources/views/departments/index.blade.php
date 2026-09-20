@@ -1,8 +1,10 @@
 <x-public-layout>
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         title="Departments"
-        subtitle="Explore the various operational arms of the Langtang Local Government Council."
+        subtitle="Explore the various operational arms of Langtang South Local Government Council."
     />
 
     <div class="py-12 bg-light-gray min-h-[60vh]">

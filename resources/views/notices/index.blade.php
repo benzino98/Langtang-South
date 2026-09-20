@@ -1,8 +1,10 @@
 <x-public-layout>
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         title="Public Notices & Announcements"
-        subtitle="Stay informed on official announcements, notices, and publications from Langtang Local Government Council."
+        subtitle="Stay informed on official announcements, notices, and publications from Langtang South Local Government Council."
     />
 
     <div class="py-12 bg-light-gray min-h-[60vh]">

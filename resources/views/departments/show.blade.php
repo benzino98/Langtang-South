@@ -1,11 +1,13 @@
 <x-public-layout
     :title="$department->name . ' | Langtang South Area Council'"
-    :meta-description="\Illuminate\Support\Str::limit(strip_tags($department->description), 160)"
+    :meta-description="\Illuminate\Support\Str::limit(strip_tags($department->overview), 160)"
     :og-title="$department->name"
-    :og-image="$department->featured_image ? asset('storage/' . $department->featured_image) : null"
+    :og-image="$department->image_path ? asset('storage/' . $department->image_path) : null"
 >
     {{-- Page Header --}}
     <x-hero-banner
+        :compact="true"
+        eyebrow="LANGTANG SOUTH LOCAL GOVERNMENT COUNCIL"
         :title="$department->name . ' Department'"
         subtitle="Operational overview, responsibilities, and leadership of the department."
     />

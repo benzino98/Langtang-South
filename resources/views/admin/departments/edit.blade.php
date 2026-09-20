@@ -10,19 +10,19 @@
 
             <x-form-input name="name" label="Department Name" :value="old('name', $department->name)" required />
 
-            <x-form-textarea name="description" label="Description" rows="8" :value="old('description', $department->description)" required />
+            <x-form-textarea name="overview" label="Overview" rows="8" :value="old('overview', $department->overview)" required />
 
             <div>
-                <label for="featured_image" class="block text-sm font-medium text-gray-700">Featured Image</label>
+                <label for="image_path" class="block text-sm font-medium text-gray-700">Featured Image</label>
                 <div class="mt-1 flex items-center">
-                    <input type="file" name="featured_image" id="featured_image" class="w-full">
+                    <input type="file" name="image_path" id="image_path" class="w-full">
                 </div>
-                @if ($department->featured_image)
+                @if ($department->image_path)
                     <div class="mt-4">
-                        <img src="{{ asset('storage/' . $department->featured_image) }}" alt="{{ $department->name }}" class="w-48 h-auto rounded-lg">
+                        <img src="{{ asset('storage/' . $department->image_path) }}" alt="{{ $department->name }}" class="w-48 h-auto rounded-lg">
                     </div>
                 @endif
-                @error('featured_image')
+                @error('image_path')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
