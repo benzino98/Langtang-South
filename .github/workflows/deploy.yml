@@ -1,0 +1,78 @@
+name: Build & Deploy to Hosting Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_sqlite, pdo_mysql, xml, ctype, json, bcmath, curl, openssl, zip
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer Dependencies (Production)
+        run: |
+          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install NPM Dependencies & Build Production Assets
+        run: |
+          npm ci || npm install
+          npm run build
+
+      - name: Deploy via SSH (SFTP / Rsync)
+        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_KEY != '' }}
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          ARGS: "-rlgoDzc --exclude='.git*' --exclude='node_modules*' --exclude='storage/*.key'"
+          SOURCE: "."
+          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+          TARGET: ${{ secrets.DEPLOY_REMOTE_DIR || '/public_html' }}
+          SCRIPT_AFTER: |
+            cd ${{ secrets.DEPLOY_REMOTE_DIR || '/public_html' }}
+            php artisan storage:link || true
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan migrate --force || true
+
+      - name: Deploy via FTP (Fallback for Shared Hosting)
+        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_KEY == '' && secrets.DEPLOY_PASSWORD != '' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          port: ${{ secrets.DEPLOY_PORT || 21 }}
+          server-dir: ${{ secrets.DEPLOY_REMOTE_DIR || '/public_html/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            storage/*.key
