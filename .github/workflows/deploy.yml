@@ -68,7 +68,7 @@ jobs:
 
       - name: Deploy via FTP (Fallback for Shared Hosting)
         if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_KEY == '' && env.DEPLOY_PASSWORD != '' }}
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
