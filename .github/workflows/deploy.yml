@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Composer Dependencies (Production)
         run: |
-          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
