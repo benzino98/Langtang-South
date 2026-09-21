@@ -1,4 +1,4 @@
-name: Build & Deploy via FTP
+name: Build & Deploy via FTP (cPanel Architecture)
 
 on:
   push:
@@ -44,29 +44,29 @@ jobs:
           npm ci || npm install
           npm run build
 
-      - name: Format Remote Directory Path
-        id: prep
-        run: |
-          DIR="${{ secrets.DEPLOY_REMOTE_DIR }}"
-          if [ -z "$DIR" ]; then
-            DIR="public_html/"
-          elif [[ "$DIR" != */ ]]; then
-            DIR="${DIR}/"
-          fi
-          echo "server_dir=$DIR" >> $GITHUB_OUTPUT
-
-      - name: Deploy to Server via FTP
+      - name: 1. Deploy Core Laravel Files (Outside public_html)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
           port: ${{ secrets.DEPLOY_PORT || 21 }}
-          server-dir: ${{ steps.prep.outputs.server_dir }}
+          server-dir: "laravel_core/"
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
+            public/**
             storage/*.key
             tests/**
             README.md
+
+      - name: 2. Deploy Public Web Assets (Inside public_html)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          port: ${{ secrets.DEPLOY_PORT || 21 }}
+          local-dir: "public/"
+          server-dir: "public_html/"
