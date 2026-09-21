@@ -65,3 +65,48 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Web-based Artisan Runner (for shared hosting without SSH)
+Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
+    $secretKey = env('ARTISAN_RUNNER_KEY', 'langtang_artisan_secret_2026');
+    if ($request->query('key') !== $secretKey) {
+        abort(403, 'Unauthorized Artisan Key');
+    }
+
+    $action = $request->query('action', 'migrate');
+    $output = '';
+
+    try {
+        switch ($action) {
+            case 'migrate':
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                $output = \Illuminate\Support\Facades\Artisan::output();
+                break;
+            case 'seed':
+                \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+                $output = \Illuminate\Support\Facades\Artisan::output();
+                break;
+            case 'key':
+                \Illuminate\Support\Facades\Artisan::call('key:generate', ['--show' => true]);
+                $output = \Illuminate\Support\Facades\Artisan::output();
+                break;
+            case 'link':
+                \Illuminate\Support\Facades\Artisan::call('storage:link');
+                $output = \Illuminate\Support\Facades\Artisan::output();
+                break;
+            case 'optimize':
+                \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+                \Illuminate\Support\Facades\Artisan::call('config:cache');
+                \Illuminate\Support\Facades\Artisan::call('route:cache');
+                \Illuminate\Support\Facades\Artisan::call('view:cache');
+                $output = "Application caches refreshed successfully!";
+                break;
+            default:
+                $output = "Unknown action. Supported actions: migrate, seed, key, link, optimize";
+        }
+    } catch (\Exception $e) {
+        $output = "Error: " . $e->getMessage();
+    }
+
+    return response('<pre style="background:#1e293b;color:#38bdf8;padding:20px;font-family:monospace;border-radius:10px;">' . e($output) . '</pre>');
+});
