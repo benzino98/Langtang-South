@@ -52,6 +52,7 @@ jobs:
           APP_KEY=${{ secrets.APP_KEY }}
           APP_DEBUG=false
           APP_URL=${{ secrets.APP_URL }}
+          APP_PUBLIC_PATH=/home/langtangsouthlga/public_html
 
           APP_LOCALE=en
           APP_FALLBACK_LOCALE=en
