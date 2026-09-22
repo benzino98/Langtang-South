@@ -85,7 +85,7 @@
                 </div>
                 <div class="relative">
                     <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
-                        <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop" alt="Council Headquarters" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/hon-nanfa-nbin.jpeg') }}" alt="Hon. Nanfa Nbin - Council Chairman" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute -bottom-6 -left-6 bg-gold-accent text-white p-6 rounded-2xl shadow-lg hidden md:block">
                         <svg class="w-10 h-10 mb-2 opacity-80" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +122,7 @@
                         <a href="{{ route('news.show', $featured->slug) }}" class="group block h-full">
                             <div class="card h-full flex flex-col">
                                 <div class="aspect-[16/9] relative overflow-hidden">
-                                    <img src="{{ $featured->featured_image ? asset('storage/' . $featured->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop' }}" 
+                                    <img src="{{ $featured->featured_image ? asset('storage/' . $featured->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
                                          alt="{{ $featured->title }}" 
                                          class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                                     <div class="absolute top-4 left-4">
@@ -157,7 +157,7 @@
                             <a href="{{ route('news.show', $article->slug) }}" class="group block h-full">
                                 <div class="card flex flex-col sm:flex-row h-full">
                                     <div class="sm:w-2/5 aspect-[4/3] sm:aspect-auto relative overflow-hidden shrink-0">
-                                        <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=400&auto=format&fit=crop' }}" 
+                                        <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
                                              alt="{{ $article->title }}" 
                                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                                     </div>
