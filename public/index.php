@@ -27,4 +27,9 @@ if (file_exists(__DIR__.'/../laravel_core/bootstrap/app.php')) {
     $app = require_once __DIR__.'/../bootstrap/app.php';
 }
 
+// Tell Laravel where the real public directory is.
+// On cPanel: __DIR__ = /home/langtangsouthlga/public_html (where Vite build lives)
+// Locally:   __DIR__ = /path/to/project/public (standard Laravel structure)
+$app->usePublicPath(__DIR__);
+
 $app->handleRequest(Request::capture());

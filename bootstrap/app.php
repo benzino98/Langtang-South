@@ -28,11 +28,4 @@ $app = Application::configure(basePath: dirname(__DIR__))
         );
     })->create();
 
-// Support cPanel split-directory architecture:
-// Laravel core lives in laravel_core/, public assets in public_html/
-// APP_PUBLIC_PATH tells Laravel where to find Vite manifest and assets.
-if ($publicPath = env('APP_PUBLIC_PATH')) {
-    $app->usePublicPath($publicPath);
-}
-
 return $app;
