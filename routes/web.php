@@ -132,6 +132,11 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
                 // Create storage symlink using PHP native symlink()
                 $target = '/home/langtangsouthlga/laravel_core/storage/app/public';
                 $link = '/home/langtangsouthlga/public_html/storage';
+                // Ensure target directory exists
+                if (!is_dir($target)) {
+                    mkdir($target, 0755, true);
+                    $output[] = "Created target directory: {$target}";
+                }
                 if (is_link($link)) {
                     unlink($link);
                 }
@@ -165,6 +170,11 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
             case 'link':
                 $target = '/home/langtangsouthlga/laravel_core/storage/app/public';
                 $link = '/home/langtangsouthlga/public_html/storage';
+                // Ensure target directory exists
+                if (!is_dir($target)) {
+                    mkdir($target, 0755, true);
+                    $output[] = "Created target directory: {$target}";
+                }
                 if (is_link($link)) {
                     unlink($link);
                 }
