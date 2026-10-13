@@ -7,29 +7,24 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateLeadershipRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
-        $leadershipId = $this->route('leadership')->id;
-
         return [
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'bio' => 'nullable|string',
-            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'display_order' => 'required|integer|min:0',
+            'full_name' => 'required|string|max:255',
+            'title' => 'required|string|in:Executive Chairman,Vice Chairman,Council Secretary,Supervisory Councillor',
+            'portfolio' => 'nullable|string|max:255',
+            'biography' => 'nullable|string',
+            'welcome_message' => 'nullable|string',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'sort_order' => 'required|integer|min:0',
         ];
     }
 }

@@ -32,12 +32,23 @@
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 <div class="flex items-center space-x-3">
-                                    <img src="{{ asset('storage/' . $member->profile_image) }}" alt="{{ $member->name }}" class="w-10 h-10 rounded-full object-cover">
-                                    <span>{{ $member->name }}</span>
+                                    @if($member->image_path)
+                                        <img src="{{ asset('storage/' . $member->image_path) }}" alt="{{ $member->full_name }}" class="w-10 h-10 rounded-full object-cover">
+                                    @else
+                                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm font-bold">
+                                            {{ strtoupper(substr($member->full_name, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                    <span>{{ $member->full_name }}</span>
                                 </div>
                             </th>
                             <td class="px-6 py-4">
-                                {{ $member->position }}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    {{ $member->title }}
+                                </span>
+                                @if($member->portfolio)
+                                    <span class="block text-xs text-gray-400 mt-1">{{ $member->portfolio }}</span>
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 {{ $member->updated_at->format('d M, Y') }}

@@ -129,6 +129,7 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
         switch ($action) {
             case 'post-deploy':
                 $run('migrate', ['--force' => true]);
+                $run('storage:link');
                 $run('config:clear');
                 $run('config:cache');
                 $run('route:clear');
