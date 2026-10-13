@@ -129,7 +129,7 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
         switch ($action) {
             case 'post-deploy':
                 $run('migrate', ['--force' => true]);
-                $run('storage:link');
+                $run('ln -sfn /home/langtangsouthlga/laravel_core/storage/app/public /home/langtangsouthlga/public_html/storage');
                 $run('config:clear');
                 $run('config:cache');
                 $run('route:clear');
@@ -148,7 +148,7 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
                 $run('key:generate', ['--show' => true]);
                 break;
             case 'link':
-                $run('storage:link');
+                $run('ln -sfn /home/langtangsouthlga/laravel_core/storage/app/public /home/langtangsouthlga/public_html/storage');
                 break;
             case 'cache-clear':
                 $run('config:clear');
