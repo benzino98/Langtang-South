@@ -129,9 +129,7 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
         switch ($action) {
             case 'post-deploy':
                 $run('migrate', ['--force' => true]);
-                if (!file_exists(public_path('uploads'))) {
-                    mkdir(public_path('uploads'), 0755, true);
-                }
+                $run('storage:link');
                 $run('config:clear');
                 $run('config:cache');
                 $run('route:clear');
