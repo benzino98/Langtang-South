@@ -129,7 +129,22 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
         switch ($action) {
             case 'post-deploy':
                 $run('migrate', ['--force' => true]);
-                $run('ln -sfn /home/langtangsouthlga/laravel_core/storage/app/public /home/langtangsouthlga/public_html/storage');
+                // Create storage symlink using PHP native symlink()
+                $target = '/home/langtangsouthlga/laravel_core/storage/app/public';
+                $link = '/home/langtangsouthlga/public_html/storage';
+                if (is_link($link)) {
+                    unlink($link);
+                }
+                if (!file_exists($link)) {
+                    symlink($target, $link);
+                    $output[] = '$ symlink: storage';
+                    $output[] = "Created: {$link} -> {$target}";
+                    $output[] = '';
+                } else {
+                    $output[] = '$ symlink: storage';
+                    $output[] = 'Link already exists (not a symlink, skipping)';
+                    $output[] = '';
+                }
                 $run('config:clear');
                 $run('config:cache');
                 $run('route:clear');
@@ -148,7 +163,21 @@ Route::get('/artisan-runner', function (\Illuminate\Http\Request $request) {
                 $run('key:generate', ['--show' => true]);
                 break;
             case 'link':
-                $run('ln -sfn /home/langtangsouthlga/laravel_core/storage/app/public /home/langtangsouthlga/public_html/storage');
+                $target = '/home/langtangsouthlga/laravel_core/storage/app/public';
+                $link = '/home/langtangsouthlga/public_html/storage';
+                if (is_link($link)) {
+                    unlink($link);
+                }
+                if (!file_exists($link)) {
+                    symlink($target, $link);
+                    $output[] = '$ symlink: storage';
+                    $output[] = "Created: {$link} -> {$target}";
+                    $output[] = '';
+                } else {
+                    $output[] = '$ symlink: storage';
+                    $output[] = 'Link already exists (not a symlink, skipping)';
+                    $output[] = '';
+                }
                 break;
             case 'cache-clear':
                 $run('config:clear');
