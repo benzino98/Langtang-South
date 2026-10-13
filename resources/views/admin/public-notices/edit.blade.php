@@ -19,7 +19,7 @@
                 </div>
                 @if ($publicNotice->attachment_path)
                     <div class="mt-4">
-                        <a href="{{ asset('uploads/' . $publicNotice->attachment_path) }}" target="_blank" class="text-sm font-medium text-blue-600 hover:underline">
+                        <a href="{{ asset('storage/' . $publicNotice->attachment_path) }}" target="_blank" class="text-sm font-medium text-blue-600 hover:underline">
                             View current attachment
                         </a>
                     </div>

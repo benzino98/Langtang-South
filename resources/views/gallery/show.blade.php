@@ -2,7 +2,7 @@
     :title="$album->title . ' | Gallery | Langtang South Area Council'"
     :meta-description="\Illuminate\Support\Str::limit(strip_tags($album->description ?? ''), 160)"
     :og-title="$album->title"
-    :og-image="$album->cover_image ? asset('uploads/' . $album->cover_image) : null"
+    :og-image="$album->cover_image ? asset('storage/' . $album->cover_image) : null"
 >
     {{-- Album Header --}}
     <section class="bg-primary-green relative overflow-hidden py-16 sm:py-20">
@@ -29,10 +29,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @forelse($album->images as $image)
-                    <a href="{{ asset('uploads/' . $image->image_path) }}"
+                    <a href="{{ asset('storage/' . $image->image_path) }}"
                        target="_blank"
                        class="group relative aspect-square overflow-hidden rounded-lg bg-gray-100">
-                        <img src="{{ asset('uploads/' . $image->image_path) }}"
+                        <img src="{{ asset('storage/' . $image->image_path) }}"
                              alt="{{ $image->caption ?? $album->title }}"
                              loading="lazy"
                              width="400"

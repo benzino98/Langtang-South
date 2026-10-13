@@ -31,7 +31,7 @@
                     @forelse ($images as $image)
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <img src="{{ asset('uploads/' . $image->image_path) }}" alt="{{ $image->caption ?? 'Gallery image' }}" class="w-16 h-12 rounded object-cover">
+                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->caption ?? 'Gallery image' }}" class="w-16 h-12 rounded object-cover">
                             </th>
                             <td class="px-6 py-4">
                                 {{ $image->album->title ?? '—' }}

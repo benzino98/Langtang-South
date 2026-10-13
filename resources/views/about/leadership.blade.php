@@ -112,7 +112,7 @@
                                 @foreach($councillors as $councillor)
                                     <div class="bg-gray-50/70 p-5 rounded-2xl border border-gray-100 hover:border-primary-green/30 hover:bg-green-50/50 transition-colors duration-200 flex items-center gap-4">
                                         @if($councillor->image_path)
-                                            <img src="{{ asset('uploads/' . $councillor->image_path) }}" alt="{{ $councillor->full_name }}" class="w-14 h-14 rounded-full object-cover shadow-sm border-2 border-white shrink-0">
+                                            <img src="{{ asset('storage/' . $councillor->image_path) }}" alt="{{ $councillor->full_name }}" class="w-14 h-14 rounded-full object-cover shadow-sm border-2 border-white shrink-0">
                                         @else
                                             <div class="w-14 h-14 rounded-full bg-primary-green/10 flex items-center justify-center text-primary-green font-bold text-lg shrink-0 border-2 border-white shadow-sm">
                                                 {{ strtoupper(substr($councillor->full_name, 0, 1)) }}

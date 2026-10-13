@@ -39,7 +39,7 @@
                 </div>
                 @if ($leadership->image_path)
                     <div class="mt-4">
-                        <img src="{{ asset('uploads/' . $leadership->image_path) }}" alt="{{ $leadership->full_name }}" class="w-32 h-32 rounded-full object-cover">
+                        <img src="{{ asset('storage/' . $leadership->image_path) }}" alt="{{ $leadership->full_name }}" class="w-32 h-32 rounded-full object-cover">
                     </div>
                 @endif
                 @error('profile_image')

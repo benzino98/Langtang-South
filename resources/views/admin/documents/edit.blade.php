@@ -21,7 +21,7 @@
                 </div>
                 @if ($document->file_path)
                     <div class="mt-4">
-                        <a href="{{ asset('uploads/' . $document->file_path) }}" target="_blank" class="text-sm font-medium text-blue-600 hover:underline">
+                        <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank" class="text-sm font-medium text-blue-600 hover:underline">
                             View current file ({{ strtoupper($document->file_type) }}, {{ number_format($document->file_size / 1024, 1) }} KB)
                         </a>
                     </div>

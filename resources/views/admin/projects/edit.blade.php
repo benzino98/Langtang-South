@@ -25,7 +25,7 @@
                 </div>
                 @if ($project->featured_image)
                     <div class="mt-4">
-                        <img src="{{ asset('uploads/' . $project->featured_image) }}" alt="{{ $project->title }}" class="w-48 h-auto rounded-lg">
+                        <img src="{{ asset('storage/' . $project->featured_image) }}" alt="{{ $project->title }}" class="w-48 h-auto rounded-lg">
                     </div>
                 @endif
                 @error('featured_image')
