@@ -68,9 +68,9 @@
                     Contact
                 </a>
 
-                 <a href="{{ url('/#') }}"
+                <a href="#"
                    class="px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
-                          {{ request()->is('contact*') ? 'text-primary-green bg-green-50/80 shadow-inner' : 'text-gray-600 hover:text-primary-green hover:bg-gray-50' }}">
+                          text-gray-600 hover:text-primary-green hover:bg-gray-50">
                     Express Booking
                 </a>
                 
@@ -152,11 +152,10 @@
                 Contact
             </a>
 
-             <a href="{{ url('/#') }}"
-                   class="px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
-                          {{ request()->is('contact*') ? 'text-primary-green bg-green-50/80 shadow-inner' : 'text-gray-600 hover:text-primary-green hover:bg-gray-50' }}">
-                    Express Booking
-                </a>
+            <a href="#"
+               class="block px-3 py-3 rounded-lg text-base font-semibold text-gray-700 hover:text-primary-green hover:bg-gray-50">
+                Express Booking
+            </a>
         </div>
     </div>
 </nav>
