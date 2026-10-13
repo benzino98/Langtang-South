@@ -61,7 +61,7 @@
                         <div class="card overflow-hidden group">
                             <div class="md:grid md:grid-cols-12 gap-0">
                                 <div class="md:col-span-7 aspect-[16/10] md:aspect-auto overflow-hidden bg-gray-100 relative">
-                                    <img src="{{ $featured->featured_image ? asset('storage/' . $featured->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop' }}"
+                                    <img src="{{ $featured->featured_image ? asset('uploads/' . $featured->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop' }}"
                                          alt="{{ $featured->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <div class="absolute top-4 left-4 bg-gold-accent text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                                         Featured Story
@@ -101,7 +101,7 @@
                                 <div class="card p-6 flex flex-col justify-between group">
                                     <div>
                                         <div class="aspect-[16/9] rounded-xl overflow-hidden mb-5 bg-gray-100 relative">
-                                            <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
+                                            <img src="{{ $article->featured_image ? asset('uploads/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
                                                  alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                             @if($article->category)
                                                 <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary-green text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">
@@ -136,7 +136,7 @@
                                 <div class="card p-6 flex flex-col justify-between group">
                                     <div>
                                         <div class="aspect-[16/9] rounded-xl overflow-hidden mb-5 bg-gray-100 relative">
-                                            <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
+                                            <img src="{{ $article->featured_image ? asset('uploads/' . $article->featured_image) : 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
                                                  alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                             @if($article->category)
                                                 <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary-green text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">

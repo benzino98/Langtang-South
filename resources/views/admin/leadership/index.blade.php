@@ -33,7 +33,7 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 <div class="flex items-center space-x-3">
                                     @if($member->image_path)
-                                        <img src="{{ asset('storage/' . $member->image_path) }}" alt="{{ $member->full_name }}" class="w-10 h-10 rounded-full object-cover">
+                                        <img src="{{ asset('uploads/' . $member->image_path) }}" alt="{{ $member->full_name }}" class="w-10 h-10 rounded-full object-cover">
                                     @else
                                         <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm font-bold">
                                             {{ strtoupper(substr($member->full_name, 0, 1)) }}

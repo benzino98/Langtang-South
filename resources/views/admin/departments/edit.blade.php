@@ -19,7 +19,7 @@
                 </div>
                 @if ($department->image_path)
                     <div class="mt-4">
-                        <img src="{{ asset('storage/' . $department->image_path) }}" alt="{{ $department->name }}" class="w-48 h-auto rounded-lg">
+                        <img src="{{ asset('uploads/' . $department->image_path) }}" alt="{{ $department->name }}" class="w-48 h-auto rounded-lg">
                     </div>
                 @endif
                 @error('image_path')

@@ -73,7 +73,7 @@
                         <div>
                             {{-- Image Container (16:9 Aspect Ratio) --}}
                             <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100 relative">
-                                <img src="{{ $project->featured_image ? asset('storage/' . $project->featured_image) : 'https://images.unsplash.com/photo-1541882703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
+                                <img src="{{ $project->featured_image ? asset('uploads/' . $project->featured_image) : 'https://images.unsplash.com/photo-1541882703-74c5e44368f9?q=80&w=600&auto=format&fit=crop' }}"
                                      alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute top-3 right-3">
                                     <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border backdrop-blur-md shadow-xs {{ $badgeClass }}">

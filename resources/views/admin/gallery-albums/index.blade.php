@@ -36,7 +36,7 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 <div class="flex items-center space-x-3">
                                     @if ($album->cover_image)
-                                        <img src="{{ asset('storage/' . $album->cover_image) }}" alt="{{ $album->title }}" class="w-12 h-12 rounded-lg object-cover">
+                                        <img src="{{ asset('uploads/' . $album->cover_image) }}" alt="{{ $album->title }}" class="w-12 h-12 rounded-lg object-cover">
                                     @endif
                                     <span>{{ $album->title }}</span>
                                 </div>

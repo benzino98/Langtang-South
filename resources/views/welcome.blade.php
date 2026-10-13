@@ -15,7 +15,7 @@
         <x-notice-bar
             title="{{ $announcements->first()->title }}"
             description="{{ $announcements->first()->description }}"
-            link="{{ $announcements->first()->attachment_path ? asset('storage/' . $announcements->first()->attachment_path) : null }}"
+            link="{{ $announcements->first()->attachment_path ? asset('uploads/' . $announcements->first()->attachment_path) : null }}"
             :isImportant="false"
         />
     @endif
@@ -122,7 +122,7 @@
                         <a href="{{ route('news.show', $featured->slug) }}" class="group block h-full">
                             <div class="card h-full flex flex-col">
                                 <div class="aspect-[16/9] relative overflow-hidden">
-                                    <img src="{{ $featured->featured_image ? asset('storage/' . $featured->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
+                                    <img src="{{ $featured->featured_image ? asset('uploads/' . $featured->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
                                          alt="{{ $featured->title }}" 
                                          class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                                     <div class="absolute top-4 left-4">
@@ -157,7 +157,7 @@
                             <a href="{{ route('news.show', $article->slug) }}" class="group block h-full">
                                 <div class="card flex flex-col sm:flex-row h-full">
                                     <div class="sm:w-2/5 aspect-[4/3] sm:aspect-auto relative overflow-hidden shrink-0">
-                                        <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
+                                        <img src="{{ $article->featured_image ? asset('uploads/' . $article->featured_image) : asset('images/hon-nanfa-nbin.jpeg') }}" 
                                              alt="{{ $article->title }}" 
                                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                                     </div>

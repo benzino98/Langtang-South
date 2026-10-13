@@ -122,5 +122,7 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT || 21 }}
           local-dir: "public/"
           server-dir: "public_html/"
+          exclude: |
+            uploads/**
 
 

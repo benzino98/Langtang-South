@@ -19,7 +19,7 @@
                 </div>
                 @if ($galleryAlbum->cover_image)
                     <div class="mt-4">
-                        <img src="{{ asset('storage/' . $galleryAlbum->cover_image) }}" alt="{{ $galleryAlbum->title }}" class="w-48 h-auto rounded-lg">
+                        <img src="{{ asset('uploads/' . $galleryAlbum->cover_image) }}" alt="{{ $galleryAlbum->title }}" class="w-48 h-auto rounded-lg">
                     </div>
                 @endif
                 @error('cover_image')

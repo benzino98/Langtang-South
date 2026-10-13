@@ -16,7 +16,7 @@
                     <input type="file" name="image" id="image" class="w-full">
                 </div>
                 <div class="mt-4">
-                    <img src="{{ asset('storage/' . $galleryImage->image_path) }}" alt="{{ $galleryImage->caption ?? 'Gallery image' }}" class="w-48 h-auto rounded-lg">
+                    <img src="{{ asset('uploads/' . $galleryImage->image_path) }}" alt="{{ $galleryImage->caption ?? 'Gallery image' }}" class="w-48 h-auto rounded-lg">
                 </div>
                 @error('image')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>

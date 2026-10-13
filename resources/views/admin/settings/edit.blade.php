@@ -38,7 +38,7 @@
                                     <div class="mt-1 flex items-center space-x-4">
                                         <input type="file" name="{{ $key }}" id="{{ $key }}" class="w-full">
                                         @if ($value)
-                                            <img src="{{ asset('storage/' . $value) }}" alt="{{ $definition['label'] }}" class="w-16 h-16 rounded-lg object-cover">
+                                            <img src="{{ asset('uploads/' . $value) }}" alt="{{ $definition['label'] }}" class="w-16 h-16 rounded-lg object-cover">
                                         @endif
                                     </div>
                                 </div>

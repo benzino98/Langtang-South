@@ -15,7 +15,7 @@
                        class="group bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300">
                         <div class="relative aspect-video overflow-hidden">
                             @if($album->cover_image)
-                                <img src="{{ asset('storage/' . $album->cover_image) }}"
+                                <img src="{{ asset('uploads/' . $album->cover_image) }}"
                                      alt="{{ $album->title }}"
                                      loading="lazy"
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">

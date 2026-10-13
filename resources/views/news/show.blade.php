@@ -3,7 +3,7 @@
     :meta-description="\Illuminate\Support\Str::limit(strip_tags($article->content), 160)"
     :og-title="$article->title"
     :og-type="'article'"
-    :og-image="$article->featured_image ? asset('storage/' . $article->featured_image) : null"
+    :og-image="$article->featured_image ? asset('uploads/' . $article->featured_image) : null"
 >
     {{-- Article Header --}}
     <section class="bg-primary-green relative overflow-hidden py-16 sm:py-20">
@@ -33,7 +33,7 @@
                 {{-- Featured Image --}}
                 @if($article->featured_image)
                     <div class="aspect-video w-full">
-                        <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('uploads/' . $article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
                     </div>
                 @endif
 

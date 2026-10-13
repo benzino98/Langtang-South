@@ -2,7 +2,7 @@
     :title="$department->name . ' | Langtang South Area Council'"
     :meta-description="\Illuminate\Support\Str::limit(strip_tags($department->overview), 160)"
     :og-title="$department->name"
-    :og-image="$department->image_path ? asset('storage/' . $department->image_path) : null"
+    :og-image="$department->image_path ? asset('uploads/' . $department->image_path) : null"
 >
     {{-- Page Header --}}
     <x-hero-banner
@@ -41,7 +41,7 @@
                         <div class="bg-white rounded-xl shadow-sm p-6 text-center">
                             <h2 class="font-heading text-md font-bold text-primary-green uppercase tracking-wide mb-4 border-b pb-2">Department Head</h2>
                             <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-100 mx-auto mb-4 border border-gray-200">
-                                <img src="{{ $department->image_path ? asset('storage/' . $department->image_path) : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop' }}"
+                                <img src="{{ $department->image_path ? asset('uploads/' . $department->image_path) : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop' }}"
                                      alt="{{ $department->head_name }}" class="w-full h-full object-cover">
                             </div>
                             <h3 class="font-heading font-bold text-gray-900 text-base mb-1">{{ $department->head_name }}</h3>
