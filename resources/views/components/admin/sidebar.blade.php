@@ -49,10 +49,10 @@
             <div
                 class="
                     w-10 h-10
-                    bg-gradient-to-bottom-from-primary-green-primary-green-light
+                    bg-primary-green
                     rounded-xl
-                    group-hover:scale-105
-                    animation-pulse-slow 4s ease-in-out infinite
+                    group-hover:bg-primary-green-light
+                    transition-colors duration-300
                 "
             >
                 <svg
@@ -257,7 +257,3 @@
     </div>
 
 </aside>
-
-<!-- Tailwind directives for animations -->
-@tailwind utility;
-@tailwind directives;
