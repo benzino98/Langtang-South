@@ -30,10 +30,6 @@ class GalleryAlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(\App\Http\Requests\Admin\StoreGalleryAlbumRequest $request)
-    {
-        $data = $request->validated();
-
         if ($request->hasFile('cover_image')) {
             $data['cover_image'] = app(\App\Services\ImageOptimizer::class)->store($request->file('cover_image'), 'gallery/covers');
         }
@@ -41,7 +37,14 @@ class GalleryAlbumController extends Controller
         $data['slug'] = Str::slug($data['title']);
         $data['is_published'] = $request->boolean('is_published');
 
-        GalleryAlbum::create($data);
+        $album = GalleryAlbum::create($data);
+
+        // Associate selected existing images with the album
+        if ($request->has('image_ids')) {
+            foreach ($request->input('image_ids', []) as $imageId) {
+                GalleryImage::where('id', $imageId)->update(['gallery_album_id' => $album->id]);
+            }
+        }
 
         return redirect()->route('admin.gallery-albums.index')->with('success', 'Gallery album created successfully.');
     }
