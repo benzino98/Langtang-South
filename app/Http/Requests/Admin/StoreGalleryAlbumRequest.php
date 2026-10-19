@@ -27,6 +27,8 @@ class StoreGalleryAlbumRequest extends FormRequest
             'description' => 'nullable|string',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'is_published' => 'nullable|boolean',
+            'image_ids' => 'nullable|array',
+            'image_ids.*' => 'integer|exists:gallery_images,id',
         ];
     }
 }

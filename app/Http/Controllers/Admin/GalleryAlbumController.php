@@ -23,7 +23,8 @@ class GalleryAlbumController extends Controller
      */
     public function create()
     {
-        return view('admin.gallery-albums.create');
+        $images = GalleryImage::latest()->get();
+        return view('admin.gallery-albums.create', compact('images'));
     }
 
     /**
