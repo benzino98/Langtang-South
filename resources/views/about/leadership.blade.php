@@ -77,6 +77,11 @@
                         @if($viceChairman)
                             <div class="card p-8 group flex flex-col justify-between">
                                 <div>
+                                    <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated border-4 border-white relative group-hover:shadow-xl transition-shadow duration-300">
+                                        <img src="{{ asset('DEPUTY CHAIRMAN.jpeg') }}"
+                                             alt="{{ $viceChairman->full_name }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                        <div class="absolute inset-0 border border-black/5 rounded-2xl pointer-events-none"></div>
+                                    </div>
                                     <h2 class="font-heading text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Deputy Chairman</h2>
                                     <div class="space-y-4">
                                         <h3 class="font-heading font-extrabold text-gray-900 text-xl">{{ $viceChairman->full_name }}</h3>
@@ -91,6 +96,11 @@
                         @if($secretary)
                             <div class="card p-8 group flex flex-col justify-between">
                                 <div>
+                                     <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated border-4 border-white relative group-hover:shadow-xl transition-shadow duration-300">
+                                        <img src="{{ asset('COUNCIL SECRETARY.jpeg') }}"
+                                             alt="{{ $secretary->full_name }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                        <div class="absolute inset-0 border border-black/5 rounded-2xl pointer-events-none"></div>
+                                    </div>
                                     <h2 class="font-heading text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Council Secretary</h2>
                                     <div class="space-y-4">
                                         <h3 class="font-heading font-extrabold text-gray-900 text-xl">{{ $secretary->full_name }}</h3>

@@ -68,7 +68,9 @@
                     Contact
                 </a>
 
-                <a href="#"
+                <a href="https://langtangexpress.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
                    class="px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
                           text-gray-600 hover:text-primary-green hover:bg-gray-50">
                     Express Booking
@@ -152,7 +154,7 @@
                 Contact
             </a>
 
-            <a href="#"
+            <a href="https://langtangexpress.com/"
                class="block px-3 py-3 rounded-lg text-base font-semibold text-gray-700 hover:text-primary-green hover:bg-gray-50">
                 Express Booking
             </a>
