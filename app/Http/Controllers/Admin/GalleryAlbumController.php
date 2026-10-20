@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GalleryAlbum;
+use App\Models\GalleryImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -27,9 +28,14 @@ class GalleryAlbumController extends Controller
         return view('admin.gallery-albums.create', compact('images'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function store(\App\Http\Requests\Admin\StoreGalleryAlbumRequest $request)
+    {
+        $data = $request->validated();
+
+        // Separate image_ids from album data (not a fillable field on GalleryAlbum)
+        $imageIds = $data['image_ids'] ?? [];
+        unset($data['image_ids']);
+
         if ($request->hasFile('cover_image')) {
             $data['cover_image'] = app(\App\Services\ImageOptimizer::class)->store($request->file('cover_image'), 'gallery/covers');
         }
@@ -40,10 +46,8 @@ class GalleryAlbumController extends Controller
         $album = GalleryAlbum::create($data);
 
         // Associate selected existing images with the album
-        if ($request->has('image_ids')) {
-            foreach ($request->input('image_ids', []) as $imageId) {
-                GalleryImage::where('id', $imageId)->update(['gallery_album_id' => $album->id]);
-            }
+        if (!empty($imageIds)) {
+            GalleryImage::whereIn('id', $imageIds)->update(['gallery_album_id' => $album->id]);
         }
 
         return redirect()->route('admin.gallery-albums.index')->with('success', 'Gallery album created successfully.');
