@@ -58,7 +58,8 @@ class GalleryAlbumController extends Controller
      */
     public function edit(GalleryAlbum $galleryAlbum)
     {
-        return view('admin.gallery-albums.edit', compact('galleryAlbum'));
+        $images = GalleryImage::latest()->get();
+        return view('admin.gallery-albums.edit', compact('galleryAlbum', 'images'));
     }
 
     /**
@@ -67,6 +68,10 @@ class GalleryAlbumController extends Controller
     public function update(\App\Http\Requests\Admin\UpdateGalleryAlbumRequest $request, GalleryAlbum $galleryAlbum)
     {
         $data = $request->validated();
+
+        // Separate image_ids from album data
+        $imageIds = $data['image_ids'] ?? [];
+        unset($data['image_ids']);
 
         if ($request->hasFile('cover_image')) {
             // Delete old cover image
@@ -80,6 +85,14 @@ class GalleryAlbumController extends Controller
         $data['is_published'] = $request->boolean('is_published');
 
         $galleryAlbum->update($data);
+
+        // Update image associations
+        // First, detach all current images
+        $galleryAlbum->images()->update(['gallery_album_id' => null]);
+        // Then attach selected images
+        if (!empty($imageIds)) {
+            GalleryImage::whereIn('id', $imageIds)->update(['gallery_album_id' => $galleryAlbum->id]);
+        }
 
         return redirect()->route('admin.gallery-albums.index')->with('success', 'Gallery album updated successfully.');
     }
