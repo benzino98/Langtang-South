@@ -12,25 +12,30 @@
             <x-form-textarea name="description" label="Description" rows="4" />
 
             <div>
-                <label for="images" class="block text-sm font-medium text-gray-700">Select Images</label>
-                <p class="mt-1 text-xs text-gray-500">Choose multiple images from the gallery to add to this album.</p>
-                <div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 max-h-80 overflow-y-auto" id="image-grid">
+                <label class="block text-sm font-medium text-gray-700">Select Images</label>
+                <p class="mt-1 text-xs text-gray-500">Click on images to select them for this album.</p>
+                <div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 max-h-96 overflow-y-auto p-1" id="image-grid">
                     @foreach ($images as $image)
-                        <label class="relative cursor-pointer image-card" data-image-card data-image-id="{{ $image->id }}">
-                            <input type="checkbox" name="image_ids[]" value="{{ $image->id }}" class="sr-only peer input-image-checkbox">
-                            <div class="relative rounded-lg overflow-hidden border border-primary-green-light transition-colors duration-200 select-image-bg" style="background-image: url('{{ asset('storage/' . $image->image_path) }}'); background-size: cover; background-position: center;">
-                                <span class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-1 py-0.5 opacity-0 selected-checkmark">✓</span>
+                        <div class="relative cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-primary-green-light transition-all duration-200 image-card" data-image-card data-image-id="{{ $image->id }}">
+                            <input type="checkbox" name="image_ids[]" value="{{ $image->id }}" class="hidden input-image-checkbox">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->caption ?? '' }}" class="w-full h-24 object-cover">
+                            <div class="absolute inset-0 bg-primary-green/30 opacity-0 transition-opacity duration-200 selected-overlay flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
                             </div>
-                            <span class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-1 py-0.5 opacity-0">+ Add</span>
-                        </label>
+                        </div>
                     @endforeach
                 </div>
+                @error('image_ids')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
                 @error('image_ids.*')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                @endif
-                <div class="mt-4 flex items-center justify-end">
-                    <span id="selection-counter" class="text-sm text-gray-600">0 images selected</span>
-                    <button type="button" id="clear-selection" class="ml-2 text-primary-green hover:underline text-sm font-medium">Clear selection</button>
+                @enderror
+                <div class="mt-3 flex items-center justify-between">
+                    <span id="selection-counter" class="text-sm font-medium text-gray-600">0 images selected</span>
+                    <button type="button" id="clear-selection" class="text-sm text-primary-green hover:underline font-medium">Clear all</button>
                 </div>
             </div>
 
@@ -54,77 +59,56 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageGrid = document.getElementById('image-grid');
     const selectionCounter = document.getElementById('selection-counter');
     const clearSelectionBtn = document.getElementById('clear-selection');
-    const imageCards = document.querySelectorAll('[data-image-card]');
 
     function updateSelectionCounter() {
-        const checkedCount = document.querySelectorAll('input[name="image_ids[]"]:checked').length;
-        selectionCounter.textContent = `${checkedCount} image${checkedCount !== 1 ? 's' : ''} selected`;
+        const checkedCount = document.querySelectorAll('.input-image-checkbox:checked').length;
+        selectionCounter.textContent = checkedCount + ' image' + (checkedCount !== 1 ? 's' : '') + ' selected';
     }
 
-    function updateCardVisual(card, isChecked) {
-        const bgDiv = card.querySelector('.select-image-bg');
-        const checkmark = card.querySelector('.selected-checkmark');
-        const addLabel = card.querySelector('span:not(.selected-checkmark)');
+    function toggleCard(card) {
+        const checkbox = card.querySelector('.input-image-checkbox');
+        if (!checkbox) return;
 
-        if (isChecked) {
-            card.classList.add('ring-2', 'ring-primary-green', 'border-primary-green-dark');
-            bgDiv.classList.add('opacity-100');
-            checkmark.classList.remove('opacity-0');
-            checkmark.classList.add('opacity-100');
-            if (addLabel) addLabel.classList.add('opacity-100');
+        checkbox.checked = !checkbox.checked;
+
+        const overlay = card.querySelector('.selected-overlay');
+        if (checkbox.checked) {
+            card.classList.remove('border-gray-200');
+            card.classList.add('border-primary-green', 'ring-2', 'ring-primary-green/30');
+            if (overlay) overlay.classList.remove('opacity-0');
         } else {
-            card.classList.remove('ring-2', 'ring-primary-green', 'border-primary-green-dark');
-            bgDiv.classList.remove('opacity-100');
-            checkmark.classList.add('opacity-0');
-            checkmark.classList.remove('opacity-100');
-            if (addLabel) addLabel.classList.remove('opacity-100');
+            card.classList.add('border-gray-200');
+            card.classList.remove('border-primary-green', 'ring-2', 'ring-primary-green/30');
+            if (overlay) overlay.classList.add('opacity-0');
         }
+
+        updateSelectionCounter();
     }
 
-    // Handle checkbox changes
-    imageGrid.addEventListener('change', function(e) {
-        if (e.target.matches('input[name="image_ids[]"]')) {
-            const card = e.target.closest('[data-image-card]');
-            if (card) {
-                updateCardVisual(card, e.target.checked);
-            }
-            updateSelectionCounter();
+    // Handle click on each image card
+    imageGrid.addEventListener('click', function(e) {
+        var card = e.target.closest('[data-image-card]');
+        if (card) {
+            e.preventDefault();
+            toggleCard(card);
         }
-    });
-
-    // Also handle click on the label/card for better UX
-    imageCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Don't double-handle if clicking the checkbox directly
-            if (e.target.type === 'checkbox') return;
-
-            const checkbox = card.querySelector('input[name="image_ids[]"]');
-            if (checkbox) {
-                checkbox.checked = !checkbox.checked;
-                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-        });
     });
 
     // Clear selection button
     clearSelectionBtn.addEventListener('click', function() {
-        document.querySelectorAll('input[name="image_ids[]"]').forEach(checkbox => {
+        document.querySelectorAll('.input-image-checkbox').forEach(function(checkbox) {
             checkbox.checked = false;
-            const card = checkbox.closest('[data-image-card]');
+            var card = checkbox.closest('[data-image-card]');
             if (card) {
-                updateCardVisual(card, false);
+                card.classList.add('border-gray-200');
+                card.classList.remove('border-primary-green', 'ring-2', 'ring-primary-green/30');
+                var overlay = card.querySelector('.selected-overlay');
+                if (overlay) overlay.classList.add('opacity-0');
             }
         });
         updateSelectionCounter();
     });
 
-    // Initialize visual state for any pre-checked boxes (e.g., after validation error)
-    document.querySelectorAll('input[name="image_ids[]"]:checked').forEach(checkbox => {
-        const card = checkbox.closest('[data-image-card]');
-        if (card) {
-            updateCardVisual(card, true);
-        }
-    });
     updateSelectionCounter();
 });
 </script>
